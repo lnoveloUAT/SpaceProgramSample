@@ -59,3 +59,20 @@ function getData(){
     return loadedData;
 }
 
+/**
+ * format the row to display data
+ * @param {*} legend 
+ * @param {*} value 
+ * @param {*} units 
+ */
+function dataRow(legend, value, units) {
+    msg = "<td>";
+    msg += legend;
+    msg += ": </td><td>";
+    msg += value;
+    msg += " " + units;
+    msg += "</td>";
+    return msg;
+}
+
+
