@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UAT Space Program</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="code.js"></script>
+    <script src="dataLoader.js"></script>
+</head>
+
+<body>
+    <h1>UAT Space Program</h1>
+    <p>
+        <div id=seconds></div>
+        <div id=latitude></div>
+        <div id=longitude></div>
+        <div id=gps_altitude></div>
+        <div id=bmpSensor_altitude></div>
+        <div id=bmpSensor_pressure></div>
+        <div id=bmpSensor_temp></div>
+        <div id=digSensor_temp></div>
+        <div id=cssSensor_temp></div>
+        <div id=cssSensor_eCO2></div>
+        <div id=cssSensor_TVOC></div>
+        <div id=UV></div>
+        <div id=accelX></div>
+        <div id=accelY></div>
+        <div id=accelZ></div>
+        <div id=magneticX></div>
+        <div id=magneticY></div>
+        <div id=magneticZ></div>
+        <div id=gyroX></div>
+        <div id=gyroY></div>
+        <div id=gyroZ></div>
+    </p>
+    <br>
+    <p>
+        <INPUT id="startButton" type="button" value="Start" onclick="start();" />
+        <INPUT id="stopButton" type="button" value="Stop" onclick="stop();" disabled=true />
+        <br><br>The time is : <div id="time"></div>
+    </p>
+</body>
+<script>
+    // Global variables
+    var theTime = new Date();
+    var tempTime = new Date();
+    var time_interval = 5000;
+    var last_iteration = 0;
+    var running = true;
+    var index = 0;
+    var timer;
+
+    // Load our data into our array
+    var data = getData();
+
+    /***************************************************************************************
+     * Functions
+     ****************************************************************************************/
+    function updateDisplay() {
+        theTime = new Date();
+        // Debugging
+        console.log(
+            "Display : " +
+            (theTime.getHours() < 10 ? "0" + theTime.getHours() : theTime.getHours()) +
+            ":" + (theTime.getMinutes() < 10 ? "0" + theTime.getMinutes() : theTime.getMinutes()) +
+            ":" + (theTime.getSeconds() < 10 ? "0" + theTime.getSeconds() : theTime.getSeconds())
+        );
+
+        // Now update the document
+        var timeRead = data[index].time_seconds;
+        if (timeRead >= 10) {
+            document.getElementById("seconds").innerHTML = "Time elapsed :" + data[index].time_seconds + " seconds";
+            document.getElementById("latitude").innerHTML = "Latitud :" + data[index].latitude;
+            document.getElementById("longitude").innerHTML = "Longltude :" + data[index].longitude;
+            document.getElementById("gps_altitude").innerHTML = "GPS Altitude :" + data[index].gps_altitude;
+            document.getElementById("bmpSensor_altitude").innerHTML = "BMP Sensor Altitude :" + data[index].bmpSensor_altitude;
+            document.getElementById("bmpSensor_pressure").innerHTML = "BMP Sensor Pressure :" + data[index].bmpSensor_pressure;
+            document.getElementById("bmpSensor_temp").innerHTML = "BMP Sensor Temperature :" + data[index].bmpSensor_temp;
+            document.getElementById("digSensor_temp").innerHTML = "Digital Sensor Temperature :" + data[index].digSensor_temp + " seconds";
+            document.getElementById("cssSensor_temp").innerHTML = "CSS Sensor Temperature :" + data[index].cssSensor_temp + " seconds";
+            document.getElementById("cssSensor_eCO2").innerHTML = "CSS Sensor eCO2 :" + data[index].cssSensor_eCO2 + " seconds";
+            document.getElementById("cssSensor_TVOC").innerHTML = "CSS Sensor TVOC :" + data[index].cssSensor_TVOC + " seconds";
+            document.getElementById("UV").innerHTML = "UV :" + data[index].UV + " seconds";
+            document.getElementById("accelX").innerHTML = "Accel X :" + data[index].accelX + " seconds";
+            document.getElementById("accelY").innerHTML = "Accel Y :" + data[index].accelY + " seconds";
+            document.getElementById("accelZ").innerHTML = "Accel Z :" + data[index].accelZ + " seconds";
+            document.getElementById("magneticX").innerHTML = "Magnetic X :" + data[index].magneticX + " seconds";
+            document.getElementById("magneticY").innerHTML = "Magnetic Y :" + data[index].magneticY + " seconds";
+            document.getElementById("magneticZ").innerHTML = "Magnetic Z :" + data[index].magneticZ + " seconds";
+            document.getElementById("gyroX").innerHTML = "Gyro X :" + data[index].gyroX + " seconds";
+            document.getElementById("gyroY").innerHTML = "Gyro Y :" + data[index].gyroY + " seconds";
+            document.getElementById("gyroZ").innerHTML = "Gyro Z :" + data[index].gyroZ + " seconds";
+
+            if (index < 499) {
+                index++;
+            } else {
+                index = 0;
+            }
+        }
+
+        document.getElementById("time").innerHTML =
+            (theTime.getHours() < 10 ? "0" + theTime.getHours() : theTime.getHours()) +
+            ":" + (theTime.getMinutes() < 10 ? "0" + theTime.getMinutes() : theTime.getMinutes()) +
+            ":" + (theTime.getSeconds() < 10 ? "0" + theTime.getSeconds() : theTime.getSeconds());
+
+
+    }
+
+    // Stop the timer
+    function stop() {
+        clearInterval(timer);
+        document.getElementById("startButton").disabled = false;
+        document.getElementById("stopButton").disabled = true;
+    }
+
+    // Start the timer
+    function start() {
+        document.getElementById("seconds").innerHTML = "Reading data...";
+        index = 0;
+        timer = setInterval(updateDisplay, time_interval);
+        document.getElementById("startButton").disabled = true;
+        document.getElementById("stopButton").disabled = false;
+    }
+</script>
+</head>
+
+</html>
