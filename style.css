@@ -1,0 +1,18 @@
+.table2 { 
+    background-image: linear-gradient(white, lightblue);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.button {
+    background-color: white;
+    border-color: lightblue;
+    border-radius: 12px;
+    width: 100px;
+    height: 30px;
+}
+
+.table3 {
+    background-image: linear-gradient(white, lightblue);
+    width: 70%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-family:fantasy">
 
 <head>
     <meta charset="UTF-8">
@@ -12,21 +12,23 @@
 </head>
 
 <body>
-    <table>
-        <tr>
-            <td>
-                <img src="images/UAT_Space.jpg" />
-            </td>
-            <td>
-                <h1>UAT Space Program</h1>
-            </td>
-        </tr>
-    </table>
-    <table id="data" border="2" width="70%">
+    <p class="top">
+        <table class="table1">
+            <tr>
+                <td>
+                    <img src="images/UAT_Space.jpg" />
+                </td>
+                <td>
+                    <h1>UAT Space Program</h1>
+                </td>
+            </tr>
+        </table>
+    </p>
+    <table id="data" border="2" width="70%" class="table2">
         <col style="width:35%">
         <col style="width:35%">
         <thead>
-            <tr>
+            <tr style="font-family:fantasy">
                 <th align="left">Data Type</th>
                 <th align="left">Reading</th>
             </tr>
@@ -57,10 +59,22 @@
     </table>
     <br>
     <p>
-        <INPUT id="startButton" type="button" value="Start" onclick="start();" />
-        <INPUT id="stopButton" type="button" value="Stop" onclick="stop();" disabled=true />
-        <br><br>The time is : <div id="time"></div>
+        <INPUT id="startButton" type="button" value="Start" onclick="start();" class="button" />
+        <INPUT id="stopButton" type="button" value="Stop" onclick="stop();" disabled=true class="button" />
     </p>
+    <br><br>
+    <table class="table3">
+        <thead>
+            <tr>
+                <th>The time is :</th>
+            </tr>
+        </thead>
+        <tbody align="center">
+            <tr id="time">
+                
+            </tr>
+        </tbody>
+    </table>
 </body>
 <script>
     // Global variables
@@ -91,24 +105,37 @@
         // Now update the document
         var timeRead = data[index].time_seconds;
         if (timeRead >= 10) {
-            document.getElementById("data").rows["seconds"].innerHTML = dataRow("Time elapsed", data[index].time_seconds, "seconds");
+            document.getElementById("data").rows["seconds"].innerHTML = dataRow("Time elapsed", data[index]
+                .time_seconds, "seconds");
             document.getElementById("data").rows["latitude"].innerHTML = dataRow("Latitud", data[index].latitude, " ");
-            document.getElementById("data").rows["longitude"].innerHTML = dataRow("Longltude", data[index].longitude, " ");
-            document.getElementById("data").rows["gps_altitude"].innerHTML = dataRow("GPS Altitude", data[index].gps_altitude, " ");
-            document.getElementById("data").rows["bmpSensor_altitude"].innerHTML = dataRow("BMP Sensor Altitude", data[index].bmpSensor_altitude, "");
-            document.getElementById("data").rows["bmpSensor_pressure"].innerHTML = dataRow("BMP Sensor Pressure", data[index].bmpSensor_pressure, "");
-            document.getElementById("data").rows["bmpSensor_temp"].innerHTML = dataRow("BMP Sensor Temperature", data[index].bmpSensor_temp, "");
-            document.getElementById("data").rows["digSensor_temp"].innerHTML = dataRow("Digital Sensor Temperature", data[index].digSensor_temp, "");
-            document.getElementById("data").rows["cssSensor_temp"].innerHTML = dataRow("CSS Sensor Temperature", data[index].cssSensor_temp, "");
-            document.getElementById("data").rows["cssSensor_eCO2"].innerHTML = dataRow("CSS Sensor eCO2", data[index].cssSensor_eCO2, "");
-            document.getElementById("data").rows["cssSensor_TVOC"].innerHTML = dataRow("CSS Sensor TVOC", data[index].cssSensor_TVOC, "");
+            document.getElementById("data").rows["longitude"].innerHTML = dataRow("Longltude", data[index].longitude,
+                " ");
+            document.getElementById("data").rows["gps_altitude"].innerHTML = dataRow("GPS Altitude", data[index]
+                .gps_altitude, " ");
+            document.getElementById("data").rows["bmpSensor_altitude"].innerHTML = dataRow("BMP Sensor Altitude", data[
+                index].bmpSensor_altitude, "");
+            document.getElementById("data").rows["bmpSensor_pressure"].innerHTML = dataRow("BMP Sensor Pressure", data[
+                index].bmpSensor_pressure, "");
+            document.getElementById("data").rows["bmpSensor_temp"].innerHTML = dataRow("BMP Sensor Temperature", data[
+                index].bmpSensor_temp, "");
+            document.getElementById("data").rows["digSensor_temp"].innerHTML = dataRow("Digital Sensor Temperature",
+                data[index].digSensor_temp, "");
+            document.getElementById("data").rows["cssSensor_temp"].innerHTML = dataRow("CSS Sensor Temperature", data[
+                index].cssSensor_temp, "");
+            document.getElementById("data").rows["cssSensor_eCO2"].innerHTML = dataRow("CSS Sensor eCO2", data[index]
+                .cssSensor_eCO2, "");
+            document.getElementById("data").rows["cssSensor_TVOC"].innerHTML = dataRow("CSS Sensor TVOC", data[index]
+                .cssSensor_TVOC, "");
             document.getElementById("data").rows["UV"].innerHTML = dataRow("UV", data[index].UV, " ");
             document.getElementById("data").rows["accelX"].innerHTML = dataRow("Accel X", data[index].accelX, " ");
             document.getElementById("data").rows["accelY"].innerHTML = dataRow("Accel Y", data[index].accelY, " ");
             document.getElementById("data").rows["accelZ"].innerHTML = dataRow("Accel Z", data[index].accelZ, " ");
-            document.getElementById("data").rows["magneticX"].innerHTML = dataRow("Magnetic X", data[index].magneticX, " ");
-            document.getElementById("data").rows["magneticY"].innerHTML = dataRow("Magnetic Y", data[index].magneticY, " ");
-            document.getElementById("data").rows["magneticZ"].innerHTML = dataRow("Magnetic Z", data[index].magneticZ, " ");
+            document.getElementById("data").rows["magneticX"].innerHTML = dataRow("Magnetic X", data[index].magneticX,
+                " ");
+            document.getElementById("data").rows["magneticY"].innerHTML = dataRow("Magnetic Y", data[index].magneticY,
+                " ");
+            document.getElementById("data").rows["magneticZ"].innerHTML = dataRow("Magnetic Z", data[index].magneticZ,
+                " ");
             document.getElementById("data").rows["gyroX"].innerHTML = dataRow("Gyro X", data[index].gyroX, " ");
             document.getElementById("data").rows["gyroY"].innerHTML = dataRow("Gyro Y", data[index].gyroY, " ");
             document.getElementById("data").rows["gyroZ"].innerHTML = dataRow("Gyro Z", data[index].gyroZ, " ");
